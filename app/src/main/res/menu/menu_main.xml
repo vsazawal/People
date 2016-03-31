@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.umd.cs.People.MainActivity">
+    <item android:id="@+id/search"
+        android:title="@string/search_title"
+        android:icon="@drawable/ic_search_white"
+        app:showAsAction="always|collapseActionView"
+        android:actionViewClass="android.widget.SearchView" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>
+
