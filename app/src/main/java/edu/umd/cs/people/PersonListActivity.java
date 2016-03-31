@@ -35,9 +35,11 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
 {
 
 
-    private static final int LOADER_ID = 1; // can be any int
+    private static final int PEOPLE_ID = 1; // can be any int
     private SimpleCursorAdapter mAdapter;
     private String mCurFilter;
+    private SearchView mSearchView;
+    private MenuItem mSearchMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
 
     private void setupListView(@NonNull ListView lView) {
 
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+        getLoaderManager().initLoader(PEOPLE_ID, null, this);
 
 
         //pass null for cursor for now (third parameter in the constructor below)
@@ -102,15 +104,17 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = new SearchView(this);
+        mSearchView = new SearchView(this);
         MenuItem item = menu.findItem(R.id.search);
-        item.setActionView(searchView);
+        item.setActionView(mSearchView);
+        mSearchMenuItem = item;
 
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnCloseListener(this);
-        searchView.setIconifiedByDefault(true);
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setFocusable(true);
+        
 
 
         return true;
@@ -134,11 +138,14 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public boolean onClose() {
+
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
+        //mSearchMenuItem.collapseActionView();
         return true;
     }
 
@@ -158,7 +165,7 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
             return true;
         }
         mCurFilter = newFilter;
-        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().restartLoader(PEOPLE_ID, null, this);
         return true;
 
 
