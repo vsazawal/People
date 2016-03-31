@@ -114,7 +114,7 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
         mSearchView.setOnCloseListener(this);
         mSearchView.setIconifiedByDefault(true);
         mSearchView.setFocusable(true);
-        
+
 
 
         return true;
