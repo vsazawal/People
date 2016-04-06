@@ -112,7 +112,7 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
-        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setIconified(false);
         mSearchView.setFocusable(true);
 
 
@@ -131,7 +131,7 @@ public class PersonListActivity extends AppCompatActivity implements LoaderManag
         if (id == R.id.action_settings) {
             return true;
         }
-
+        // superclass handles the searchview
         return super.onOptionsItemSelected(item);
     }
 
